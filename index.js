@@ -1,6 +1,14 @@
 #!/usr/bin/env node
 
+import path from "path";
+import fs from "fs";
 import minimist from "minimist";
+
+import { fileURLToPath } from "url";
+import { dirname } from "path";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const args = minimist(process.argv.slice(2), {
   boolean: ["help"],
@@ -9,6 +17,10 @@ const args = minimist(process.argv.slice(2), {
 
 if (args.help) {
   printHelp();
+} else if (args.file) {
+  let filePath = path.resolve(args.file);
+  console.log(__dirname);
+  console.log(filePath);
 } else {
   error("Incorrect Usage", true);
 }
