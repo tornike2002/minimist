@@ -19,13 +19,17 @@ if (args.help) {
   printHelp();
 } else if (args.file) {
   let filePath = path.resolve(args.file);
-  console.log(__dirname);
-  console.log(filePath);
+  processFile(filePath);
 } else {
   error("Incorrect Usage", true);
 }
 
 // ***************************************
+
+function processFile(filePath) {
+  var contents = fs.readFileSync(filePath, "utf8");
+  console.log(contents.toUpperCase());
+}
 
 function printHelp() {
   console.log("index.js usage:");
@@ -34,7 +38,7 @@ function printHelp() {
   console.log("  index.js --file={FILENAME}");
   console.log("");
   console.log("--help                 print this help");
-  console.log("--file={FILENAME}      process the file");
+  console.log("--file={FILENAME}      process the file {FILENAME}");
 }
 
 function error(msg, includeHelp = false) {
